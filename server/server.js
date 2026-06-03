@@ -15,6 +15,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Eventora API is running',
+    endpoints: {
+      health: '/api/health',
+      events: '/api/events',
+      auth: '/api/auth'
+    }
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
